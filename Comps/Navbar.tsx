@@ -1,21 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const router = useRouter();
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) setUser(JSON.parse(storedUser));
+  }, []);
+
+  const handleSignOut = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    router.push("/"); // Redirect to home
+  };
 
   return (
     <nav className="font-bold bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-     
         <div className="flex items-center justify-between">
           <div className="flex h-30 items-center">
-          
             <div className="flex-shrink-0 flex items-center">
               <Link href="/" className="flex items-center">
                 <Image
@@ -27,7 +39,6 @@ const Navbar = () => {
               </Link>
             </div>
 
-          
             <div className="hidden md:flex space-x-8 ml-10 font-bold">
               <Link href="/technology" className="text-gray-700 hover:text-purple-600 transition duration-150">Technology</Link>
               <Link href="/gadget" className="text-gray-700 hover:text-purple-600 transition duration-150">Gadgets</Link>
@@ -35,6 +46,14 @@ const Navbar = () => {
               <Link href="/app" className="text-gray-700 hover:text-purple-600 transition duration-150">Apps</Link>
               <Link href="/games" className="text-gray-700 hover:text-purple-600 transition duration-150">Games</Link>
               <Link href="/podcast" className="text-gray-700 hover:text-purple-600 transition duration-150">Podcast</Link>
+
+              {/* Show Create Post only if signed in */}
+             {user && (
+  <Link href="/create-post" className="text-gray-700 hover:text-purple-600 transition duration-150">
+    Create Post
+  </Link>
+)}
+
             </div>
 
             {/* Mobile Menu Button */}
@@ -53,19 +72,9 @@ const Navbar = () => {
                   stroke="currentColor"
                 >
                   {isOpen ? (
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   ) : (
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 6h16M4 12h16m-7 6h7"
-                    />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
                   )}
                 </svg>
               </button>
@@ -74,8 +83,21 @@ const Navbar = () => {
 
           {/* Right side links */}
           <div className="hidden md:flex space-x-10">
-            <Link href="/subscribe" className="text-gray-700 hover:text-purple-500 font-bold transition duration-150">Subscribe</Link>
-            <Link href="/signin" className="text-gray-700 hover:text-purple-500 font-bold transition duration-150">Sign In</Link>
+            
+
+            {user ? (
+              <>
+               <button
+                  onClick={handleSignOut}
+                  className="text-gray-700 hover:text-purple-500 font-bold transition duration-150"
+                >
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <Link href="/signin" className="text-gray-700 hover:text-purple-500 font-bold transition duration-150">Sign In</Link>
+            )}
+
             <Image
               src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1756976052/search-svgrepo-com_1_ho6af0.svg"
               alt="Search Icon"
@@ -95,8 +117,24 @@ const Navbar = () => {
               <Link href="/apps" className="block py-2 text-gray-700 hover:text-blue-600 transition" onClick={() => setIsOpen(false)}>Apps</Link>
               <Link href="/games" className="block py-2 text-gray-700 hover:text-blue-600 transition" onClick={() => setIsOpen(false)}>Games</Link>
               <Link href="/podcast" className="block py-2 text-gray-700 hover:text-blue-600 transition" onClick={() => setIsOpen(false)}>Podcast</Link>
-              <Link href="/subscribe" className="block py-2 text-gray-700 hover:text-blue-600 transition" onClick={() => setIsOpen(false)}>Subscribe</Link>
-              <Link href="/signup" className="block py-2 text-gray-700 hover:text-blue-600 transition" onClick={() => setIsOpen(false)}>Sign In</Link>
+
+              {/* Create Post */}
+              {user && (
+                <Link href="/create-post" className="block py-2 text-gray-700 hover:text-blue-600 transition" onClick={() => setIsOpen(false)}>Create Post</Link>
+              )}
+
+          
+
+              {!user ? (
+                <Link href="/signin" className="block py-2 text-gray-700 hover:text-blue-600 transition" onClick={() => setIsOpen(false)}>Sign In</Link>
+              ) : (
+                <button
+                  onClick={() => { handleSignOut(); setIsOpen(false); }}
+                  className="block py-2 text-gray-700 hover:text-blue-600 transition w-full text-left"
+                >
+                  Sign Out
+                </button>
+              )}
             </div>
           </div>
         )}
