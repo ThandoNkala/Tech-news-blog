@@ -4,9 +4,9 @@ const PostSchema = new Schema(
   {
     title: { type: String, required: true },
     content: { type: String, required: true },
-    authorId: { type: String, required: true },
+    image: { type: String, default: null }, // ✅ fixed
     authorName: { type: String, required: true },
-    imageUrl: { type: String },
+    authorId: { type: String, required: true },
   },
   { timestamps: true }
 );

@@ -11,10 +11,10 @@ const EditorPick = () => {
           {/* Editor's Pick Section */}
           <div className="border-b border-gray-400  ">
             <div className="flex justify-between items-center mb-4">
-              <h1 className="text-2xl font-bold text-black">
+              <h1 className="text-3xl font-bold text-black">
                 <a href="#editor-pick">Editor's Pick</a>
               </h1>
-              <h1 className="text-purple-500 text-2xl font-bold hover:text-black">
+              <h1 className="text-purple-500 text-1xl font-bold hover:text-black">
                 <a href="#">View All <img src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1757596455/reshot-icon-right-arrow-UCA8NGYZDJ_xgxfy5.svg" alt="arrow" className="inline-block w-10" /></a>
               </h1>
             </div>
@@ -29,9 +29,9 @@ const EditorPick = () => {
                     className="-z-50"
                   />
                   <h3 className="text-lg font-bold w-50">{link.title}</h3>
-                  <p className="text-sm text-black-500 bg-[#000000] -mt-50 ml-10 z-30">
+                  {/* <p className="text-sm text-black-500 bg-[#000000] -mt-50 ml-10 z-30">
                     {link.heading}
-                  </p>
+                  </p> */}
                 </div>
               ))}
             </div>

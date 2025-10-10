@@ -22,7 +22,7 @@ const Banner = () => {
                     <li className="flex " key={detail.Image}>
                       <Image
                         src={`https://res.cloudinary.com/dp5gnnji3/image/upload/v1756989576/${detail.Image}`}
-                        alt={detail.name || detail.date || detail.comment}
+                        alt={'icon'}
                         width={20}
                         height={20}
                       />

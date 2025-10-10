@@ -2,81 +2,118 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useUser } from "../app/context/UserContext"; // adjust path
 
-export default function BlogPostForm() {
+export default function CreatePostPage() {
   const router = useRouter();
-  const { user } = useUser();
 
-  const [form, setForm] = useState({ title: "", content: "" });
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [message, setMessage] = useState("");
-
-  if (!user) return <p className="text-red-500">You must be signed in to create a post.</p>;
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.[0]) setImageFile(e.target.files[0]);
-  };
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [file, setFile] = useState<File | null>(null);
+  const [authorName, setAuthorName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setMessage("");
+    setLoading(true);
+    setError("");
 
     try {
+      // ✅ Build FormData for file + text fields
       const formData = new FormData();
-      formData.append("title", form.title);
-      formData.append("content", form.content);
-      formData.append("authorId", user._id); // make sure your IUser has _id
-      formData.append("authorName", user.name);
-      if (imageFile) formData.append("image", imageFile);
+      formData.append("title", title);
+      formData.append("content", content);
+      formData.append("authorName", authorName || "Anonymous");
+      if (file) formData.append("file", file);
 
-      const res = await fetch("/api/post", { method: "POST", body: formData });
+      const res = await fetch("/api/post", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text || "Failed to create post");
+      }
+
       const data = await res.json();
+      console.log("✅ Post created:", data);
 
-      if (!res.ok) throw new Error(data.error || "Failed to create post");
-
-      setMessage("Post created successfully!");
-      setForm({ title: "", content: "" });
-      setImageFile(null);
-
-      router.push("/"); // redirect to homepage
-
-    } catch (err: unknown) {
-      setMessage(err instanceof Error ? err.message : "Unexpected error");
+      // ✅ Redirect & refresh home page
+      router.push("/");
+      router.refresh();
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded shadow mt-10">
-      <h2 className="text-2xl font-bold mb-4">Create a Blog Post</h2>
+    <div className="max-w-2xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-6 text-center">Create New Post</h1>
+
       <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="title"
-          placeholder="Post Title"
-          value={form.title}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
-        />
-        <textarea
-          name="content"
-          placeholder="Write your post..."
-          value={form.content}
-          onChange={handleChange}
-          className="w-full p-2 border rounded h-40"
-          required
-        />
-        <input type="file" accept="image/*" onChange={handleFileChange} />
-        <button type="submit" className="bg-blue-700 text-white py-2 px-4 rounded hover:bg-blue-500">
-          Submit
+        <div>
+          <label className="block font-semibold mb-1">Title</label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="w-full border rounded p-2"
+            placeholder="Enter post title"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-1">Content</label>
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            className="w-full border rounded p-2 h-40"
+            placeholder="Write your content here..."
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-1">Author Name (optional)</label>
+          <input
+            type="text"
+            value={authorName}
+            onChange={(e) => setAuthorName(e.target.value)}
+            className="w-full border rounded p-2"
+            placeholder="Your name"
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-1">Image (optional)</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setFile(e.target.files?.[0] || null)}
+            className="w-full border rounded p-2"
+          />
+          {file && (
+            <p className="text-sm text-gray-600 mt-1">
+              Selected: {file.name} ({Math.round(file.size / 1024)} KB)
+            </p>
+          )}
+        </div>
+
+        {error && <p className="text-red-500 text-sm">{error}</p>}
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700 transition"
+        >
+          {loading ? "Publishing..." : "Publish Post"}
         </button>
       </form>
-      {message && <p className="mt-3 text-green-500">{message}</p>}
     </div>
   );
 }
