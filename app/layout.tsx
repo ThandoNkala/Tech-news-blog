@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/Comps/Navbar";
-import Footer from "@/Comps/Footer";
+import Navbar from "../Comps/Navbar";
+import Footer from "../Comps/Footer";
 import { UserProvider } from "../app/context/UserContext"; // adjust path if need
 
 
