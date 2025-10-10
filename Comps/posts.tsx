@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface IPost {
   _id: string;
@@ -54,7 +55,7 @@ export default function HomePage() {
           >
             <h2 className="text-2xl font-bold">{post.title}</h2>
             {post.image && (
-              <img
+              <Image
                 src={post.image}
                 alt={post.title}
                 className="w-full h-150 object-cover rounded mt-2"

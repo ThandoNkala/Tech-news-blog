@@ -1,4 +1,5 @@
 // components/BannerSlider.tsx
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
 const BannerSlider = () => {
@@ -49,7 +50,7 @@ const BannerSlider = () => {
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           <div className="relative w-full h-full">
-            <img
+            <Image
               src={slide.image}
               alt={slide.title}
               className="w-full h-full object-cover"

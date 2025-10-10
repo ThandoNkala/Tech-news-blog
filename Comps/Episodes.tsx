@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const Episodes = () => {
   return (
     <div className="container flex justify-center">
@@ -6,7 +8,7 @@ const Episodes = () => {
           {Techlinks.map((link) => (
             <div key={link.title} className="flex">
               <div>
-                <img
+                <Image
                   src={link.image}
                   alt={link.title}
                   width={600}

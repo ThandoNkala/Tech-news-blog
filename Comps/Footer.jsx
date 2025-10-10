@@ -1,25 +1,27 @@
+import Image from "next/image";
+
 const Footer = () => {
   return (
     <div >
     <div className="flex justify-around border-b border-gray-200 ">
       <div>
-        <img src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1756820281/site-logo_jz9rbb.svg"
+        <Image src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1756820281/site-logo_jz9rbb.svg"
          alt="logo"
          width={160}
          height={50}
          className=" mb-3"/>
         <ul className="mb-3 text-grey-500 flex align-middle space-x-4 mt-10">
-          <li><img src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1759913034/instagram-167-svgrepo-com_rujkwo.svg"
+          <li><Image src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1759913034/instagram-167-svgrepo-com_rujkwo.svg"
            alt="" 
            width={20}
             height={30}
            /></li>
-          <li><img src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1759913021/facebook-svgrepo-com_2_nhi2sn.svg" alt="" 
+          <li><Image src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1759914435/twitter-154-svgrepo-com_pq1rpo.svg" alt="" 
            width={30}
             height={30}
             className="-mt-1"
            /></li>
-          <li><img src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1759914435/twitter-154-svgrepo-com_pq1rpo.svg" alt="" 
+          <li><Image src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1759914435/twitter-154-svgrepo-com_pq1rpo.svg" alt="" 
            width={25}
             height={30}
              className="-mt-1"

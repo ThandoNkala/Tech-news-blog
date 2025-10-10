@@ -1,5 +1,7 @@
-import { linkSync } from "fs";
-import { title } from "process";
+// import { linkSync } from "fs";
+// import { title } from "process";
+
+import Image from "next/image";
 
 const Music = () => {
   return (
@@ -11,7 +13,7 @@ const Music = () => {
         {Followers.map((links) => (
           <div className="flex items-start  pt-2" key={links.title}>
             <div>
-              <img
+              <Image
                 src={links.image}
                 alt={links.title}
                 width={20}

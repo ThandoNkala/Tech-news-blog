@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const Gadget = () => {
   return (
     <div className="grid place-items-center mt-10">
@@ -27,7 +29,7 @@ const Gadget = () => {
         {GadgetCards.map((links) => (
           <div className="p-5 space-y-5 border-b border-gray-400" key={links.title1}>
             <div>
-              <img 
+              <Image
               src={links.image1} 
               alt={"gyufy"} 
               width={600} 
@@ -42,7 +44,7 @@ const Gadget = () => {
             <div className="flex justify-between mt-5 ">
 
               <div className="">
-                <img
+                <Image
                   src={links.image2}
                   alt={"gyufy"}
                   width={310}
@@ -56,7 +58,7 @@ const Gadget = () => {
               </div>
 
               <div>
-                <img
+                <Image
                   src={links.image3}
                   alt={"gyufy"}
                   width={310}

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const Apps = () => {
   return (
     <div className="grid place-items-center ">
@@ -26,7 +28,7 @@ const Apps = () => {
       <div className="flex space-x-5 border-b border-gray-400">
         {cards.map((card) => (
           <div className="w-100 space-y-2 h-120" key={card.title}>
-            <img src={card.Image} 
+            <Image src={card.Image} 
                alt={"gyufy"} 
                width={400}
                height={150} 

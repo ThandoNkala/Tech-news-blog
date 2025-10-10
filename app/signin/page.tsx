@@ -46,7 +46,10 @@ export default function SigninPage() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow-md w-80 mt-20">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-6 rounded-xl shadow-md w-80 mt-20"
+      >
         <h2 className="text-2xl font-bold mb-4 text-center">Sign In</h2>
 
         <input
@@ -75,7 +78,21 @@ export default function SigninPage() {
           Sign In
         </button>
 
-        {message && <p className="mt-3 text-center text-green-500">{message}</p>}
+        {message && (
+          <p className="mt-3 text-center text-green-500">{message}</p>
+        )}
+
+        {/* 🆕 Sign Up option */}
+        <p className="mt-4 text-center text-sm text-gray-600">
+          Don’t have an account?{" "}
+          <button
+            type="button"
+            onClick={() => router.push("/signup")}
+            className="text-blue-600 hover:underline"
+          >
+            Sign Up
+          </button>
+        </p>
       </form>
     </div>
   );
