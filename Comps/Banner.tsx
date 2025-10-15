@@ -46,7 +46,7 @@ const Banner = () => {
 
           <div className="mt-4">
             {links.map((link) => (
-              <div className="mt-5">
+              <div className="mt-5" key={link.title}>
                 <h1 className="text-purple-500 text-sm font bold">
                   <a href="#">{link.heading}</a>
                 </h1>

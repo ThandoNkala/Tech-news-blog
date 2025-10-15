@@ -14,7 +14,7 @@ cloudinary.config({
 });
 
 // ✅ GET — fetch posts
-export async function GET() {
+export async function GET() {   
   try {
     await connectToDB();
     const posts = await Post.find().sort({ createdAt: -1 });
