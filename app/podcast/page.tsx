@@ -19,7 +19,7 @@ const PodcastPage = () => {
           <Image src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1759999976/podcasts_1_weq843.png" alt="" />
           Apple Podcasts
           </a></p>
-           <p className="font-bold"><a href="#">
+           <p  className="font-bold"><a href="#">
           <Image src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1759999978/spotify_1_vadgmp.png" alt="" />
           Spotify
           </a></p>
