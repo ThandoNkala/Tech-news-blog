@@ -3,6 +3,8 @@ import { v2 as cloudinary } from "cloudinary";
 import connectToDB from "@/lib/mongodb";
 import Post from "@/models/Post";
 import type { UploadApiResponse } from "cloudinary";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -31,6 +33,10 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     await connectToDB();
+    const session = await getServerSession(authOptions as any);
+    if (!session || !session.user || !(session.user as any).id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
     const formData = await req.formData();
     const title = formData.get("title") as string;
@@ -84,7 +90,8 @@ export async function POST(req: Request) {
       title,
       content,
       image: imageUrl,
-      authorName: authorName || null,
+      authorName: authorName || (session.user as any).name || null,
+      authorId: (session.user as any).id as string,
     });
 
     await newPost.save();

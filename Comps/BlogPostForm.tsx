@@ -31,6 +31,10 @@ export default function CreatePostPage() {
         body: formData,
       });
 
+      if (res.status === 401) {
+        router.push("/signin");
+        return;
+      }
       if (!res.ok) {
         const text = await res.text();
         throw new Error(text || "Failed to create post");

@@ -19,6 +19,19 @@ export const authOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   pages: { signIn: "/signin" },
+  callbacks: {
+    async jwt({ token, user }) {
+      // Prefer DB user.id when available, else fall back to token.sub (default user id)
+      const userId = (user as any)?.id || (token as any)?.id || token.sub;
+      if (userId) token.id = userId as string;
+      return token;
+    },
+    async session({ session, token }) {
+      const tid = (token as any)?.id || token.sub;
+      if (session.user && tid) (session.user as any).id = tid as string;
+      return session;
+    },
+  },
 };
 
 export const runtime = "nodejs";

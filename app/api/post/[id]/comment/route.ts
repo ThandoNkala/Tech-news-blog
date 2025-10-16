@@ -28,6 +28,11 @@ export async function POST(
       return NextResponse.json({ error: "Post not found" }, { status: 404 });
     }
 
+    // Ensure comments array exists before pushing
+    if (!post.comments) {
+      // @ts-expect-error runtime init
+      post.comments = [];
+    }
     post.comments.push({ authorName: authorName || "Anonymous", content });
     await post.save();
 

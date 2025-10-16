@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Music from "@/Comps/Music";
 
+
 const Tech = () => {
   return (
     <>
@@ -89,6 +90,7 @@ const Techlinks = [
   },
 
 ];
+
 const Detail = [
   { Image: "profile-svgrepo-com_zioqkr.svg", name: "akbarh" },
   { Image: "calendar-svgrepo-com_1_vsqkvm.svg", date: "July 7, 2021" },

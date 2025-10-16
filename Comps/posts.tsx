@@ -28,7 +28,7 @@ export default function HomePage() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch("/api/post");
+        const res = await fetch("/api/post", { cache: "no-store" });
         if (!res.ok) throw new Error(await res.text() || "Failed to fetch posts");
         const data: IPost[] = await res.json();
         setPosts(data);
