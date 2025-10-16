@@ -3,6 +3,9 @@ import connectToDB from "@/lib/mongodb";
 import user from "@/models/user";
 import bcrypt from "bcryptjs"; 
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 
 interface SignUpBody {
   name: string;

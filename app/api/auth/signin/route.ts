@@ -3,6 +3,9 @@ import  connectToDB from "@/lib/mongodb";
 import bcrypt from "bcryptjs";
 import user from "@/models/user";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function POST(req: Request) {
   try {
     const { email, password } = await req.json();
