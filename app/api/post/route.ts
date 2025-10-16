@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
 import connectToDB from "@/lib/mongodb";
 import Post from "@/models/Post";
+import type { UploadApiResponse } from "cloudinary";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -19,9 +20,10 @@ export async function GET() {
     await connectToDB();
     const posts = await Post.find().sort({ createdAt: -1 });
     return NextResponse.json(posts);
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("❌ Error fetching posts:", err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    const message = err instanceof Error ? err.message : "Unknown error";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 
@@ -51,7 +53,7 @@ export async function POST(req: Request) {
       const arrayBuffer = await file.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
 
-      const uploadRes = await new Promise((resolve, reject) => {
+      const uploadRes = await new Promise<UploadApiResponse>((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream(
           {
             folder: "blog_uploads",
@@ -60,17 +62,17 @@ export async function POST(req: Request) {
           (error, result) => {
             if (error) {
               console.error("❌ Cloudinary upload error:", error);
-              reject(error);
+              reject(error as Error);
             } else {
               console.log(" Cloudinary upload success:", result?.secure_url);
-              resolve(result);
+              resolve(result as UploadApiResponse);
             }
           }
         );
         stream.end(buffer);
       });
 
-      imageUrl = (uploadRes as any).secure_url || null;
+      imageUrl = uploadRes.secure_url || null;
     } else {
       console.log("No file uploaded for this post");
     }
@@ -92,8 +94,9 @@ export async function POST(req: Request) {
       { message: "Post created successfully", post: newPost },
       { status: 201 }
     );
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("❌ Error creating post:", err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    const message = err instanceof Error ? err.message : "Unknown error";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

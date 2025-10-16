@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
 import connectToDB from "@/lib/mongodb"; 
 import Post from "@/models/Post";
+import type { UploadApiResponse } from "cloudinary";
 
 // Cloudinary con fig
 cloudinary.config({
@@ -32,11 +33,11 @@ export async function POST(req: Request) {
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
 
-      const uploadResult = await new Promise<any>((resolve, reject) => {
+      const uploadResult = await new Promise<UploadApiResponse>((resolve, reject) => {
         cloudinary.uploader
           .upload_stream({ folder: "blog_uploads" }, (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
+            if (error) reject(error as Error);
+            else resolve(result as UploadApiResponse);
           })
           .end(buffer);
       });
@@ -54,8 +55,9 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json(newPost, { status: 201 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Upload error:", error);
-    return NextResponse.json({ error: "Upload failed", details: error.message }, { status: 500 });
+    const message = error instanceof Error ? error.message : "Unknown error";
+    return NextResponse.json({ error: "Upload failed", details: message }, { status: 500 });
   }
 }
