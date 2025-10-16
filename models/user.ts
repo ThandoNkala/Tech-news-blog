@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, Model } from "mongoose";
 
 export interface IUser extends Document {
   name: string;
@@ -7,7 +7,7 @@ export interface IUser extends Document {
   password: string;
 }
 
-const userSchema: Schema<IUser> = new Schema(
+const UserSchema: Schema<IUser> = new Schema(
   {
     name: { type: String, required: true },
     username: { type: String, required: true },
@@ -17,6 +17,8 @@ const userSchema: Schema<IUser> = new Schema(
   { timestamps: true }
 );
 
-const user = mongoose.models.user || mongoose.model<IUser>("user", userSchema);
+// ✅ Prevent model overwrite errors during hot reloads / serverless re-imports
+const User: Model<IUser> =
+  mongoose.models.User || mongoose.model<IUser>("User", UserSchema);
 
-export default user;
+export default User;
