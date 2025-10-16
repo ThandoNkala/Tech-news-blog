@@ -62,7 +62,7 @@ export async function POST(req: Request) {
               console.error("❌ Cloudinary upload error:", error);
               reject(error);
             } else {
-              console.log("✅ Cloudinary upload success:", result?.secure_url);
+              console.log(" Cloudinary upload success:", result?.secure_url);
               resolve(result);
             }
           }
