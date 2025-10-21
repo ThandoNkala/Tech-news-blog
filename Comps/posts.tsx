@@ -78,8 +78,8 @@ export default function HomePage() {
   if (loading) return <p className="text-center mt-10">Loading posts...</p>;
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">Latest Blog Posts</h1>
+    <div className="w-full mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-6">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center">Latest Blog Posts</h1>
 
       {posts.length === 0 && <p className="text-center text-gray-500">No posts yet.</p>}
 
@@ -90,7 +90,7 @@ export default function HomePage() {
             className="p-4 border rounded shadow hover:shadow-md transition"
           >
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-bold">{post.title}</h2>
+              <h2 className="text-xl sm:text-2xl font-bold">{post.title}</h2>
               <button
                 onClick={() => deletePost(post._id)}
                 className="text-red-600 font-semibold"
@@ -103,9 +103,9 @@ export default function HomePage() {
               <Image
                 src={post.image}
                 alt={post.title}
-                width={600}
-                height={180}
-                className="object-cover rounded mt-2"
+                width={1200}
+                height={675}
+                className="w-full h-auto object-cover rounded mt-2"
               />
             )}
 

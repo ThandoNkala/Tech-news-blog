@@ -2,8 +2,8 @@ import Image from "next/image";
 
 const Technology = () => {
   return (
-    <div className="grid place-items-center ">
-        <div className="container p-5 rounded-lg m-5">
+    <div className=" place-items-center ">
+        <div className="container p-5  m-5">
          <div className="flex justify-between  w-full ">
           <div>
              <h1 className="text-3xl font-bold text-black">
@@ -25,7 +25,7 @@ const Technology = () => {
           </div>
         </div>
         </div>
-      <div className="flex space-x-5 border-b border-gray-400">
+      <div className="flex sm:flex-row flex-col space-x-5 border-b border-gray-400">
         {cards.map((card) => (
           <div className="w-100 space-y-2 h-120" key={card.title}>
             <Image src={card.Image} 

@@ -45,10 +45,10 @@ export default function SigninPage() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-xl shadow-md w-80 mt-20"
+        className="bg-white w-full max-w-sm sm:max-w-md p-6 sm:p-8 rounded-xl shadow-md"
       >
         <h2 className="text-2xl font-bold mb-4 text-center">Sign In</h2>
 
@@ -58,7 +58,7 @@ export default function SigninPage() {
           placeholder="Email"
           value={form.email}
           onChange={handleChange}
-          className="w-full p-2 mb-3 border rounded"
+          className="w-full p-3 mb-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         />
         <input
@@ -67,13 +67,13 @@ export default function SigninPage() {
           placeholder="Password"
           value={form.password}
           onChange={handleChange}
-          className="w-full p-2 mb-3 border rounded"
+          className="w-full p-3 mb-4 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         />
 
         <button
           type="submit"
-          className="w-full bg-blue-700 text-white py-2 rounded hover:bg-blue-500"
+          className="w-full bg-blue-700 text-white py-3 rounded-md hover:bg-blue-600 transition-colors"
         >
           Sign In
         </button>

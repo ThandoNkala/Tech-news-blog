@@ -2,46 +2,39 @@ import Image from "next/image";
 
 const Apps = () => {
   return (
-    <div className="grid place-items-center ">
-        <div className="container p-5 rounded-lg m-5">
-         <div className="flex justify-between  w-full ">
-          <div>
-             <h1 className="text-3xl font-bold text-black">
-                Technology
-              </h1>
-          </div>
-          <div>
-            {" "}
-            <h1 className="text-purple-500 text-1xl font-bold hover:text-black">
-              <a href="#">
-                More in Technology {" "}
-                <img
-                  src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1757596455/reshot-icon-right-arrow-UCA8NGYZDJ_xgxfy5.svg"
-                  alt="arrow"
-                  className="inline-block w-10"
-                />
-              </a>
-            </h1>
-          </div>
+    <div className="mt-10">
+      <div className="w-full mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between w-full mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-black">Technology</h1>
+          <a href="#" className="text-sm sm:text-base font-bold text-purple-600 hover:text-black">
+            More in Technology
+            <img
+              src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1757596455/reshot-icon-right-arrow-UCA8NGYZDJ_xgxfy5.svg"
+              alt="arrow"
+              className="inline-block w-6 sm:w-8 ml-2 align-middle"
+            />
+          </a>
         </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 border-b border-gray-200 pb-8">
+          {cards.map((card) => (
+            <div className="space-y-2" key={card.title}>
+              <Image
+                src={card.Image}
+                alt={card.title}
+                width={600}
+                height={338}
+                className="w-full h-auto rounded-md object-cover"
+              />
+              <h2 className="text-lg sm:text-xl font-bold">{card.title}</h2>
+              <p className="text-xs sm:text-sm text-gray-500">
+                {card.name} - {card.date}
+              </p>
+              <p className="text-sm text-gray-600">{card.paragraph}</p>
+            </div>
+          ))}
         </div>
-      <div className="flex space-x-5 border-b border-gray-400">
-        {cards.map((card) => (
-          <div className="w-100 space-y-2 h-120" key={card.title}>
-            <Image src={card.Image} 
-               alt={"gyufy"} 
-               width={400}
-               height={150} 
-               />
-            <h2 className="text-2xl font-bold">{card.title}</h2>
-            <p className="text-sm text-gray-500">
-              {card.name}- {card.date}
-            </p>
-            <p className="text-md text-gray-500">{card.paragraph}</p>
-          </div>
-        ))}
       </div>
-    </div>  
+    </div>
   );
 };
 

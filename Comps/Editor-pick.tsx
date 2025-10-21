@@ -6,38 +6,34 @@ import Sign from "./sign";
 const EditorPick = () => {
   return (
     <>
-      <div className="container  p-5 rounded-lg m-5">
-        <div className="p-5 flex justify-between">
+      <div className="w-full mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Editor's Pick Section */}
-          <div className="border-b border-gray-400  ">
-            <div className="flex justify-between items-center mb-4">
-              <h1 className="text-3xl font-bold text-black">
+          <div className="lg:col-span-2">
+            <div className="flex items-center justify-between border-b border-gray-300 pb-3 mb-4">
+              <h1 className="text-2xl sm:text-3xl font-bold text-black">
                 <a href="#editor-pick">Editor's Pick</a>
               </h1>
-              <h1 className="text-purple-500 text-1xl font-bold hover:text-black">
-                <a href="#">View All <img src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1757596455/reshot-icon-right-arrow-UCA8NGYZDJ_xgxfy5.svg" alt="arrow" className="inline-block w-10" /></a>
+              <h1 className="text-purple-600 text-sm sm:text-base font-bold hover:text-black">
+                <a href="#">View All <img src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1757596455/reshot-icon-right-arrow-UCA8NGYZDJ_xgxfy5.svg" alt="arrow" className="inline-block w-6 sm:w-8 align-middle" /></a>
               </h1>
             </div>
-            <div className="flex  flex-col md:flex-row">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {EditorPicklinks.map((link) => (
-                <div className="mt-5 mr-5" key={link.title}>
+                <div className="space-y-2" key={link.title}>
                   <Image
                     src={link.image}
                     alt={link.title}
-                    width={250}
-                    height={200}
-                    className="-z-50"
+                    width={400}
+                    height={260}
+                    className="w-full h-auto  object-cover"
                   />
-                  <h3 className="text-lg font-bold w-50">{link.title}</h3>
-                  {/* <p className="text-sm text-black-500 bg-[#000000] -mt-50 ml-10 z-30">
-                    {link.heading}
-                  </p> */}
+                  <h3 className="text-base sm:text-lg font-bold">{link.title}</h3>
                 </div>
               ))}
             </div>
-            
           </div>
-          <div className="">
+          <div>
             <Sign />
           </div>
         </div>

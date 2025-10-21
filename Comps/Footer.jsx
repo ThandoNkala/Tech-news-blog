@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const Footer = () => {
-  return (
+  return (<>
     <div >
     <div className="flex justify-around border-b border-gray-200 ">
       <div>
@@ -9,7 +9,7 @@ const Footer = () => {
          alt="logo"
          width={160}
          height={50}
-         className=" mb-3"/>
+         className="mb-3"/>
         <ul className="mb-3 text-grey-500 flex align-middle space-x-4 mt-10">
           <li><Image src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1759913034/instagram-167-svgrepo-com_rujkwo.svg"
            alt="" 
@@ -24,7 +24,7 @@ const Footer = () => {
           <li><Image src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1759914435/twitter-154-svgrepo-com_pq1rpo.svg" alt="" 
            width={25}
             height={30}
-             className="-mt-1"
+              className="-mt-1"
            /></li>
 
         </ul>
@@ -56,12 +56,13 @@ const Footer = () => {
           <li>Code of Conduct</li>
         </ul>
       </div>
+      </div>
     </div>
     <div className="text-center mt-3 p-5">
         <h1 >Copyright © 2025 Tech News.</h1>
     </div>
-    </div>
-  );
+  </>);
 };
 
 export default Footer;
+

@@ -7,57 +7,57 @@ import Music from "@/Comps/Music";
 const Tech = () => {
   return (
     <>
-      <div className="container  p-5 rounded-lg m-5">
-        <div className="p-5 flex justify-between">
-          <div className="">
-            <div className="flex  justify-between w-200">
-              <div className="text-3xl font-bold ">
-                {" "}
-                <h1>Tech Reviews</h1>
-              </div>
-              <div className="text-lg font-bold text-purple-600">
-                {" "}
-                <h1>More in Tech Reviews <span><img src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1757596455/reshot-icon-right-arrow-UCA8NGYZDJ_xgxfy5.svg" alt=""  className="inline-block w-10" /></span></h1>
-              </div>
+      <div className="w-full mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <h1 className="text-2xl sm:text-3xl font-bold">Tech Reviews</h1>
+              <h2 className="text-sm sm:text-base font-bold text-purple-600">
+                More in Tech Reviews
+                <img
+                  src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1757596455/reshot-icon-right-arrow-UCA8NGYZDJ_xgxfy5.svg"
+                  alt=""
+                  className="inline-block w-6 sm:w-8 ml-2 align-middle"
+                />
+              </h2>
             </div>
             <div>
               {Techlinks.map((link) => (
-                <div key={link.title} className="flex">
-                  <div>
+                <div key={link.title} className="flex flex-col md:flex-row gap-4 md:gap-6 mt-6">
+                  <div className="md:w-1/2">
                     <Image
                       src={link.image}
                       alt={link.title}
-                      width={450}
-                      height={200}
-                      className="mt-8 "
+                      width={800}
+                      height={450}
+                      className="w-full h-auto object-cover"
                     />
                   </div>
-                  <div className="w-100 m-12">
-                    <h1 className="text-lg  text-purple-600 mb-5">{link.heading}</h1>
-                    <h1 className="text-2xl font-bold mb-3">{link.title}</h1>
-                    <p>{link.paragraph}</p>
-                      <div>
-                <ul className="flex space-x-4 text-grey-600 text-sm">
-                  {Detail.map((detail) => (
-                    <li className="flex " key={detail.Image}>
-                      <Image
-                        src={`https://res.cloudinary.com/dp5gnnji3/image/upload/v1756989576/${detail.Image}`}
-                        alt={detail.name || detail.date || detail.comment}
-                        width={15}
-                        height={15}
-                        background={"black"}
-                      />
-                      {detail.name || detail.date || detail.comment}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                  <div className="md:w-1/2 md:m-2">
+                    <h3 className="text-xs sm:text-sm text-purple-600 mb-2 sm:mb-3">{link.heading}</h3>
+                    <h2 className="text-lg sm:text-2xl font-bold mb-2 sm:mb-3">{link.title}</h2>
+                    <p className="text-sm sm:text-base leading-relaxed">{link.paragraph}</p>
+                    <div className="mt-3 sm:mt-4">
+                      <ul className="flex flex-wrap gap-x-4 gap-y-2 text-gray-600 text-xs sm:text-sm">
+                        {Detail.map((detail) => (
+                          <li className="flex items-center gap-1" key={detail.Image}>
+                            <Image
+                              src={`https://res.cloudinary.com/dp5gnnji3/image/upload/v1756989576/${detail.Image}`}
+                              alt={detail.name || detail.date || detail.comment}
+                              width={15}
+                              height={15}
+                            />
+                            {detail.name || detail.date || detail.comment}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="">
+          <div>
             <Music />
           </div>
         </div>

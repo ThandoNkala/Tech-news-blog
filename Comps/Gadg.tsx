@@ -2,77 +2,70 @@ import Image from "next/image";
 
 const Gadget = () => {
   return (
-    <div className="grid place-items-center mt-10">
-      <div className="flex  w-300  justify-between  ">
-         <div className="flex  justify-between w-143">
-              <div className="text-3xl font-bold ">
-                {" "}
-                <h1>Gadgets</h1>
-              </div>
-              <div className="text-lg font-bold text-purple-600 hover:text-black">
-                {" "}
-                <h1><a href="#">More in Gadgets <span><img src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1757596455/reshot-icon-right-arrow-UCA8NGYZDJ_xgxfy5.svg" alt=""  className="inline-block w-10" /></span></a></h1>
-              </div>
-            </div>
-             <div className="flex  justify-between w-143">
-              <div className="text-3xl font-bold ">
-                {" "}
-                <h1>Software</h1>
-              </div>
-              <div className="text-lg font-bold text-purple-600 hover:text-black">
-                {" "}
-                <h1> <a href="#">More in Software <span><img src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1757596455/reshot-icon-right-arrow-UCA8NGYZDJ_xgxfy5.svg" alt=""  className="inline-block w-10" /></span></a></h1>
-              </div>
-            </div>
-      </div>
-      <div className="container flex  p-5 m-5">
-        {GadgetCards.map((links) => (
-          <div className="p-5 space-y-5 border-b border-gray-400" key={links.title1}>
-            <div>
-              <Image
-              src={links.image1} 
-              alt={"gyufy"} 
-              width={600} 
-              height={150} />
-              <h1 className="text-2xl font-bold mt-3 mb-2">{links.title1}</h1>
-              <p className="text-sm text-gray-500 mb-2">
-                {links.name} {links.date} {links.comment}
-              </p>
-              <p className="text-md text-gray-500">{links.paragraph1}</p>
-            </div>
-            
-            <div className="flex justify-between mt-5 ">
-
-              <div className="">
-                <Image
-                  src={links.image2}
-                  alt={"gyufy"}
-                  width={310}
-                  height={150}
-                />
-                <h1 className="text-xl font-bold mt-2 mb-2">{links.title2}</h1>
-                <p className="text-sm text-gray-500 mb-2">
-                  {links.name} {links.date} {links.comment}
-                </p>
-                <p className="text-md text-gray-500">{links.paragraph2}</p>
-              </div>
-
-              <div>
-                <Image
-                  src={links.image3}
-                  alt={"gyufy"}
-                  width={310}
-                  height={150}
-                />
-                <h1 className="text-xl font-bold mt-2 mb-2">{links.title3}</h1>
-                <p className="text-sm text-gray-500 mb-2">
-                  {links.name} {links.date} {links.comment}
-                </p>
-                <p className="text-md text-gray-500">{links.paragraph2}</p>
-              </div>
-            </div>
+    <div className="mt-10">
+      <div className="w-full mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl sm:text-3xl font-bold">Gadgets</h2>
+            <a href="#" className="text-sm sm:text-base font-bold text-purple-600 hover:text-black">
+              More in Gadgets
+              <img src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1757596455/reshot-icon-right-arrow-UCA8NGYZDJ_xgxfy5.svg" alt="" className="inline-block w-6 sm:w-8 ml-2 align-middle" />
+            </a>
           </div>
-        ))}
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl sm:text-3xl font-bold">Software</h2>
+            <a href="#" className="text-sm sm:text-base font-bold text-purple-600 hover:text-black">
+              More in Software
+              <img src="https://res.cloudinary.com/dp5gnnji3/image/upload/v1757596455/reshot-icon-right-arrow-UCA8NGYZDJ_xgxfy5.svg" alt="" className="inline-block w-6 sm:w-8 ml-2 align-middle" />
+            </a>
+          </div>
+        </div>
+        <div className="mt-6 space-y-10 flex sm:flex-row flex-col space-x-10 ">
+          {GadgetCards.map((links) => (
+            <div className="pb-6 border-b border-gray-200 " key={links.title1}>
+              <div >
+                <Image
+                  src={links.image1}
+                  alt={links.title1}
+                  width={800}
+                  height={575}
+                  className=" h-auto  object-cover"
+                />
+                <h3 className="text-xl sm:text-2xl font-bold mt-3 mb-2">{links.title1}</h3>
+                <p className="text-xs sm:text-sm text-gray-500 mb-2">
+                  {links.name} {links.date} {links.comment}
+                </p>
+                <p className="text-sm text-gray-600">{links.paragraph1}</p>
+              </div>
+              <div className="mt-5 grid grid-cols-2 sm:grid-cols-2">
+                <div>
+                  <Image
+                    src={links.image2}
+                    alt={links.title2}
+                    width={400}
+                    height={250}
+                    className=" h-auto object-cover"
+                  />
+                  <h4 className="text-lg font-bold mt-2 mb-1">{links.title2}</h4>
+                  <p className="text-xs sm:text-sm text-gray-500 mb-2">{links.name} {links.date} {links.comment}</p>
+                  <p className="text-sm text-gray-600">{links.paragraph2}</p>
+                </div>
+                <div>
+                  <Image
+                    src={links.image3}
+                    alt={links.title3}
+                    width={400}
+                    height={250}
+                    className=" h-auto object-cover"
+                  />
+                  <h4 className="text-lg font-bold mt-2 mb-1">{links.title3}</h4>
+                  <p className="text-xs sm:text-sm text-gray-500 mb-2">{links.name} {links.date} {links.comment}</p>
+                  <p className="text-sm text-gray-600">{links.paragraph2}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
